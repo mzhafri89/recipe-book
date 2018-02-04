@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-primary" [disabled]="!recipeForm.valid">Save</button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" formControlName="recipeName">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="imageURL">Image URL</label>
+            <input type="text" name="imageURL" id="imageURL" class="form-control" formControlName="recipeImg">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" id="description" rows="6" formControlName="recipeDesc">
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" formArrayName="recipeIng">
+          <div class="row" *ngFor="let formCtrl of recipeForm.get('recipeIng').controls; let idx = index" [formGroupName]="idx">
+            <div class="col-md-8">
+              <input type="text" class="form-control" name="ingName" id="ingName" formControlName="ingName">
+            </div>
+            <div class="col-md-2">
+              <input type="number" class="form-control" name="ingAmount" id="imgAmount" formControlName="ingAmt">
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-danger" (click)="onDelete(idx)">X</button>
+            </div>
+            <hr>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="onAddIngredients()">Add Ingredient</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
